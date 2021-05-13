@@ -1,0 +1,24 @@
+[
+    {
+    "id": "1",
+    "region": "Accra",
+    "district": "Accra Central",
+    "distance":"200",
+    "unit":"kg" 
+  },
+  {
+    "id": "2",
+    "region": "Accra",
+    "district": "Mallam",
+    "distance":"150",
+    "unit":"kg" 
+  },
+  {
+    "id": "3",
+    "region": "Accra",
+    "district": "Kasoa",
+    "distance":"150",
+    "unit":"kg" 
+  }
+]
+

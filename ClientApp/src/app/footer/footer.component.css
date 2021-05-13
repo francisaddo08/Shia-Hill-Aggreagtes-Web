@@ -1,0 +1,58 @@
+#footer-infor{
+    height: 200px;
+}
+
+#footer-base-line{
+    background-color: white;
+    line-height: 1px;
+}
+@media screen and (max-width: 600px) {
+    #desktop-footerView {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    #footer-mobile {
+      display: none;
+    }
+  }
+
+  #foot {
+      background-color: rgb(19, 18, 18);
+
+  }
+  #aggregate-types a{
+    text-decoration: none;
+    color: unset;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  #social-media-facebook{
+    float: left;
+  }
+  #social-media-twiter{
+    float: left;
+  }
+  
+  .clearfix{
+    overflow: auto;
+  }
+  
+  
+  .fa {
+    font-size: 20px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+  .fa-facebook {
+    color: white;
+  }
+  .fa-twitter {
+    color: white;
+  }

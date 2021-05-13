@@ -1,0 +1,31 @@
+
+
+<div id="product-container" class="container">
+    <div id="nocement-products" class="row" *ngIf="this.data.cementProducts.length < 1" >
+        <div class="col-sm-12">
+          <P>Sorry There are no cement products</P>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div *ngFor="let item of this.data.cementProducts" class="col-sm-4">
+            <div id="ghacem-s-s" class="card m-2  ">
+                <div class="border " >
+                    <img class="card-img-top img p-4" src="{{item.imageUrl}}.jpg" alt="{{item.productName}}">
+                </div >
+                <div class="card-title">
+                   <span>{{item.productName}}  </span> <br>
+                   <span class="m-1">Price</span><span>{{item.price | currency:'GHC'}}</span>
+
+                </div>
+                <div class="card-body text-left">
+                    <p class="card-text">{{item.description}} </p>
+                </div>
+                <a class="nav-link text-dark stretched-link" routerLink="{{item.productUrl}}"></a>
+            </div>
+        </div>
+
+    </div>
+  
+</div>

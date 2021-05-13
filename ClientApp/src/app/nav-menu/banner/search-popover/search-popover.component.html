@@ -1,0 +1,42 @@
+
+<div class="input-group has-search">
+    <input class="form-control py-2 border-right-0 border" 
+    type="text" 
+    placeholder="Search"
+     id="search-input"
+     (keyup)="searchKey($event)" 
+        value=""
+        placement="bottom"
+       [ngbPopover] ="searchedProducts"
+        container="body"
+        >
+    <span class="input-group-append">
+      <button class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-search"></i>
+      </button>
+    </span>
+</div>
+<ng-template #searchedProducts>
+    <div *ngIf="this.sortedProducts.length < 1" >
+        <p><b>No item found </b></p>
+    </div>
+    <div *ngIf="this.sortedProducts.length > 0"  >
+      <div  *ngFor="let item of this.sortedProducts">
+        <div id="ghacem-s-s" class="card m-2  ">
+            <div class="border " >
+                <img class="card-img-top img p-4" src="{{item.imageUrl}}.jpg" alt="{{item.productName}}">
+            </div >
+            <div class="card-title">
+               <span>{{item.productName}}  </span> <br>
+               <span class="m-1">Price</span><span>{{item.price | currency:'GHC'}}</span>
+
+            </div>
+            <div class="card-body text-left">
+                <p class="card-text">{{item.description}} </p>
+            </div>
+            <a class="nav-link text-dark stretched-link" routerLink="{{item.productUrl}}"></a>
+        </div>
+      </div>
+    </div>
+
+</ng-template>

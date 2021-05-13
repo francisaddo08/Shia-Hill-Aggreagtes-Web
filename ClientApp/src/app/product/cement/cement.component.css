@@ -1,0 +1,25 @@
+
+#product-container  .card {
+    height: max-content
+    
+}
+#product-container  .card .border img{
+    height:240px;
+    
+}
+
+#product-container  .card .card-title{
+    height:30px;
+    
+}
+
+
+#product-container  .card .card-body{
+    height:40px;
+    
+}
+
+#nocement-products{
+    height: 100vmin;
+}
+

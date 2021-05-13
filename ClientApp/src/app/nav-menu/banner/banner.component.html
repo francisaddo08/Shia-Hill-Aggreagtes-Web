@@ -1,0 +1,44 @@
+<section class="container-fluid mb-1">
+    <div id="banner-desktop" class="row ">
+        <div class="col-md-4 float-right">
+            <span class="p-5  m-5 " >
+              <button class="border-0 bg-white" (click)="gotoHomePage()" >
+                SHIA HILL AGGREGATES
+              </button>  
+           
+            
+                
+            </span>
+        </div>
+
+        <div class="col-md-4">
+            <a class=" nav-link text-dark stretched-link float-right" [routerLink]="['/Orders']">
+                <i class="mr-1">#items</i><i id="shopping-items">{{data.order.orderLine.length}}</i>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+         <app-search-popover></app-search-popover>
+        </div>
+      
+    </div>
+</section>
+
+<section id="banner-mobile" class="row text-center">
+    
+       
+        <div class="col-6 ">
+            <a class=" nav-link text-dark stretched-link float-right" [routerLink]="['/Orders']">
+                <i class="mr-1">#items</i><i id="shopping-items">{{data.order.orderLine.length}}</i>
+            </a>
+
+        </div>
+        <div class="input-group col-6 ">
+        
+                <app-search-popover></app-search-popover>
+            
+          
+        </div>
+    
+
+</section>

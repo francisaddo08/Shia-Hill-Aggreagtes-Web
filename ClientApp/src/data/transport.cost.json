@@ -1,0 +1,20 @@
+[
+    {
+    
+    "costPerKillometer":"0.20",
+    "payload": 1000,
+    "unit":"kg"
+  },
+  {
+  
+    "costPerKillometer":"0.10",
+    "payload": 500,
+    "unit":"kg"
+  },
+  {
+    
+    "costPerKillometer":"0.40",
+    "payload": 2000,
+    "unit":"kg"
+  }
+]

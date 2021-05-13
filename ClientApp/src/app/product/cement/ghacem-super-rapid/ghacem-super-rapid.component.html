@@ -1,0 +1,19 @@
+<P>{{this.data.ghacem_s_r_ID}}</P>
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <app-lightbox [productsName]="productName" [imageUrls_3] = "images3" [imageUrls_2] = "images2" [imageUrls_1] = " images1"></app-lightbox>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <app-sales [unit]="unit" [weightPerUnite]="weight"  
+            [price] = "this.data.ghacem_s_r_price"
+             [productsName]="productName"[productUrls]="productUrl"
+              [imageUrl1] = "imageUrl1"
+              [productID] = "this.data.ghacem_s_r_ID" [productDescription] = "productDescription" >
+            </app-sales>
+        </div>
+    </div>
+    <hr>
+ 
+    <app-related-product></app-related-product>
+</section>

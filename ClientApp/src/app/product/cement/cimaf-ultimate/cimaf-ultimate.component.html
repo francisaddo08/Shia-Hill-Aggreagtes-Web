@@ -1,0 +1,61 @@
+
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <app-lightbox [productsName]="productName" [imageUrls_3] = "images3" [imageUrls_2] = "images2" [imageUrls_1] = " images1"></app-lightbox>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <app-sales [unit]="unit"
+             [weightPerUnite]="weight"  
+            [price] = "this.data.cimaf_ultimate_price" 
+            [productsName]="productName"[productUrls]="productUrl" 
+            [imageUrl1] = "imageUrl1" 
+            [productID] = "this.data.cimaf_ultimate_ID" [productDescription] = "productDescription">
+        </app-sales>
+        </div>
+    </div>
+    <hr>
+ 
+    <app-related-product></app-related-product>
+</section>
+
+
+<!--  
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+           <app-lightbox></app-lightbox>
+        </div>
+        <div class="col-6">
+            <div id="ghacem-desc">
+                <p>The GHACEM Supper strong cement</p>
+                <p>
+                    It comes in 50kg bags, we stack 50 bags to the pallet. We can supply up
+                    to four pallets (200 bags) to a customer within 7 days. Anything more than that,
+                    you need place order a week in advance by calling 01245779324455
+                </p>
+            </div>
+            <div id="inputsPanel">
+                <span class="mr-2">Quantity</span><span>
+                    <input #inputQuantity type="number" min="0" max="200" name="GHACEM-Super-Strong" class=""
+                        id="inputQuantity"  (change) = "quantityChange()" />
+                    </span> 
+                        <span class="m-1">Price</span><span>&#163;</span><span
+                    id="price">50</span>
+            </div>
+            <div id="totals-div" *ngIf="productQuantity > 0" >
+                <span class="mr-1">Total</span><span>£</span><span>{{totalCost}}</span>
+            </div>
+
+            <div class="mt-2 mr-lg-4 mr-sm-1">
+                <span> <button id="chatbtn" type="button" class="btn btn-dark add-to-basket " (click)="addToBasket()" >ADD TO
+                        CHART</button></span>
+                <span> <button id="ghacemreset" type="button" class="btn btn-dark reset-order">RESET
+                        ORDER</button></span>
+                <span> <button id="ghacemssbtn" type="button" class="btn btn-dark">ghace ss button</button></span>
+            </div>
+        </div>
+    </div>
+
+</section>
+ -->

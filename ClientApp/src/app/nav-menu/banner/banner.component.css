@@ -1,0 +1,23 @@
+
+
+@media screen and (max-width: 600px) {
+    #banner-desktop {
+      display: none;
+    }
+    app-search-popover {
+      float: right;
+    }
+  }
+  @media screen and (min-width: 600px) {
+    #banner-mobile {
+      display: none;
+    }
+  }
+ #orders-search a {
+   display: inline;
+
+ }
+ input{
+   display: inline;
+   border-color: whitesmoke;
+ }

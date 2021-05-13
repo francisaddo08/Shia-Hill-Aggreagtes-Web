@@ -1,0 +1,247 @@
+<div class="row" *ngIf="this.data.order.orderLine.length < 1">
+    <div class="col-6">
+        You Currently have 0 items in your BASKET
+    </div>
+    <div class="col-6">
+        <button class="btn float-right border border-black border-bottom-0 display-3" (click)="goToShop()">
+            Shop</button>
+    </div>
+
+</div>
+<!-- ========================= ==========================     = =========================-->
+<section *ngIf="this.data.order.orderLine.length > 0">
+
+
+
+    <div id="basket-view" class="container table-responsive">
+        <table class="table  table-borderless  ">
+            <thead class="thead-light">
+                <tr>
+                    <th class="m-1">Product</th>
+                    <th class="m-1">Name</th>
+                    <th class="m-1 ">Quantity</th>
+                    <th class="m-1">Price</th>
+                    <th class="m-1">Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of this.data.order.orderLine">
+                    <td> <a class="nav-link" routerLink="{{item.productUrl}}">
+                            <img src="{{item.imageUrl}}" alt="item.productName">
+                        </a>
+                    </td>
+                    <td class="basket-item " id="productName">{{item.productName}}</td>
+                    <td class="basket-item " id="quantity">
+                        <!-- Change total UIs on mouse enter and leave-->
+                        <input
+                            (mouseenter)="showTransportTypeOption = false;
+                         this.data.areaSelected = false; this.data.showcollectionDays = false ; this.data.showCheckOutButton = false "
+                            (mouseleave)="showTransportTypeOption = true" #quantity (change)="quantityChange($event)"
+                            type="number" max="250" min="1" value="{{item.quantity}}">
+                    </td>
+                    <td class="basket-item " id="unitPrice">GHC{{item.unitPrice}}</td>
+                    <td class="basket-item " id="price">GHC{{item.price | number: '2.2'}}</td>
+                    <td class="basket-item " id="delete">
+                        <button class="border-less" (click)="delete($event)">delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="bg-dark" style="height: 2px;">
+    </div>
+
+    <!--  =======================  Orders below transport option==========    ==========-->
+
+    <section class="container" id="no-transport"
+        *ngIf="this.data.order.orderLine.length > 0 &&  this.data.order.totalWeight < this.data.transportReuestLevel && this.data.showPickUpOrders">
+        <div class="row">
+            <div class=" col-lg-6 col-md-6 col-sm-12 col-xl-6">
+                <!--===========================================  24 hours pick up time =============================== -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text text-lg-center"> Provide your MOMO details and pay in the shop</div>
+                        <div class="form-group card-text mt-1">
+                            <!--  ------------------------------  MOMO name------------------------------------------ -->
+                            <input (change)="customerNameInput($event)" type="text" pattern="[A-Za-z]{40}"
+                                class="form-control" placeholder="Enter Your Full Name" required>
+                        </div>
+                        <div class="card-text">
+                            <div class="form-check-inline" *ngFor="let item of this.data.momoProvider">
+                                <!--  ------------------------------  MOMO provider------------------------------------------ -->
+                                <input max="10" [name]="item" (change)="selectMomoProvider($event)" type="checkbox"
+                                    class="form-check-input" value="{{item}}" id="item" required>{{item}}
+
+                            </div>
+                            <!--  ------------------------------  MOMO NUMBER------------------------------------------ -->
+                            <div class="form-group card-text">
+                                <input (mouseenter)="this.isMoMoNumberValid = false" [disabled]="isMoMOChecked"
+                                    (change)="mobileNumberInput($event)" type="tel" class="form-control" max="10"
+                                    value="" placeholder="Enter Your Mobile Money Number" onkeydown="return ( event.ctrlKey || event.altKey 
+                                || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                                || (95<event.keyCode && event.keyCode<106)
+                                || (event.keyCode==8) || (event.keyCode==9) 
+                                || (event.keyCode>34 && event.keyCode<40) 
+                                || (event.keyCode==46))" required>
+                            </div>
+                            <div class="card-text" *ngIf=" this.data.order.momoProvider.length != 0 &&  this.isMoMoNumberValid ">
+                                <span id="momo-error-message">{{this.momoNumberErrorMessage}} </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6">
+                <div class="card mt-lg-4 mt-xl-4">
+                    <div class="card-title text-right">
+                        Sub Total:
+                        GHC{{this.data.order.subTotal |number:'2.2'}}
+                    </div>
+                    <div class="card-body text-right">
+                        <button [disabled]="isCheckOutReady" (click)="goToCheckout()"> Checkout
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <hr class="bg-dark" style="height: 2px;">
+    </section>
+    <!--   = = =  =============================Order for scheduled collection and delivery    ======================      -->
+    <section class="container"
+        *ngIf="this.data.order.orderLine.length > 0 &&  this.data.order.totalWeight > this.data.transportReuestLevel showTransportTypeOption ">
+        <div class="row">
+            <div class=" col-sm-12 col-lg-6  col-md-6">
+
+                <div *ngIf="showTransportTypeOption" class=" bg-secondary mb-3">
+                    <div class="form-group m-1">
+                        <select (change)="onTransportChange($event)" #DeliverySelection class="form-control"
+                            id="delivery-selection" name="delivery">
+                            <option>Please Select Delivery Option</option>
+                            <option>Pay and Collect Yourself</option>
+                            <option>Pay and Delivery</option>
+                        </select>
+                    </div>
+                    <div *ngIf="this.data.deliveryOption" class="form-group m-1">
+                        <select (change)="onAreaSection($event)" #areaSelection class="form-control" id="delivery-area"
+                            name="delivery">
+                            <option>Please Select Area</option>
+                            <option *ngFor="let item of this.data.deliveryArea">{{item.district}}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!--   = ======================= orders eligible for delivery ============ =======================-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text  text-md-center "> Provide your MOMO details and pay in the shop</div>
+                        <div class="form-group card-text mt-1">
+                            <!--  ------------------------------  MOMO name------------------------------------------ -->
+                            <input (change)="customerNameInput($event)" type="text" class="form-control" value=""
+                                placeholder="Enter Your Full Name">
+                        </div>
+                        <div class="card-text">
+                            <div class="form-check-inline" *ngFor="let item of this.data.momoProvider">
+                                <!--  ------------------------------  MOMO provider------------------------------------------ -->
+                                <input [name]="item.name" name="{{item}}" (change)="selectMomoProvider($event)"
+                                    type="checkbox" class="form-check-input" value="{{item}}">{{item}}
+                            </div>
+
+                        </div>
+                        <div class="form-group card-text">
+                            <!--  ------------------------------  MOMO NUMBER------------------------------------------ -->
+                            <input [disabled]="isMoMOChecked" (change)="mobileNumberInput($event)" type="tel"
+                                class="form-control" max="10" value="" placeholder="Enter Your Mobile Money Number"
+                                onkeydown="return ( event.ctrlKey || event.altKey 
+                        || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                        || (95<event.keyCode && event.keyCode<106)
+                        || (event.keyCode==8) || (event.keyCode==9) 
+                        || (event.keyCode>34 && event.keyCode<40) 
+                        || (event.keyCode==46) )">
+                        </div>
+                        <div class="card-text" *ngIf=" this.data.order.momoProvider.length != 0 &&  this.isMoMoNumberValid ">
+                            <span id="momo-error-message">{{this.momoNumberErrorMessage}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!--   === =============================   Pay for Delivery option-->
+                <div *ngIf="this.data.deliveryOption && this.data.areaSelected ">
+                    <p class="ml-1">Please Select Delivery Date</p>
+                    <div id="delivery-days" class="border-black form-check "
+                        *ngFor="let item of this.data.deliveryDatesAvaliable">
+                        <!-- Show delivery days -->
+                        <label class="form-check-label   mr-1">
+                            <input type="radio" (change)="deliveryDaySelected($event)" class="form-check-input mr-1"
+                                value="{{item.dayOfMonthName}} {{item.dayOfMonthNumber}} {{item.mouthName}} {{item.year}} Between {{item.start}} {{item.end}}"
+                                name="optradio">
+                            <span class="mr-1">{{item.dayOfMonthName}} </span> <span
+                                class="mr-1">{{item.dayOfMonthNumber}}</span>
+                            <span class="mr-1">{{item.mouthName}}</span>
+                            <span class="mr-1">{{item.year}}</span>
+                            <span class="mr-1">Between</span>
+                            <span class="mr-1">{{item.start}}</span><span class="mr-1">{{item.end}}</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- ===================  PAY AND COLLECT OPTION============================================= -->
+                <div *ngIf="this.data.collectionOption && this.data.order.totalWeight > this.data.transportReuestLevel 
+                    && this.data.showcollectionDays
+                    ">
+                    <p class="ml-1">Please Select Collection Day</p>
+                    <div id="collection-days" class="border-black form-check "
+                        *ngFor="let item of this.data.collectionDaysAvaliable">
+                        <!-- Display collection days-->
+                        <label class="form-check-label   mr-1">
+                            <input type="radio" class="form-check-input mr-1" name="optradio"
+                                (change)="collectionDaySelected($event)"
+                                value="{{item.dayOfMonthName}} {{item.dayOfMonthNumber}} {{item.mouthName}} {{item.year}}">
+                            <span class="m-1 "> {{item.dayOfMonthName}}</span>
+                            <span class="mr-1">{{item.dayOfMonthNumber}}</span>
+                            <span class="mr-1">{{item.mouthName}}</span>
+                            <span class="mr-1">{{item.year}}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div *ngIf="showDeliveryTotal && this.data.areaSelected">
+                    <span class="border ">
+                        <span class="float-right ml-2 ">GHC{{this.data.order.deliveryCost |
+                            number:'2.2'}}</span>
+                        <span class="float-right m-auto ">Delivery Cost:</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="border ">
+                        <span class="float-right ml-2 ">GHC{{this.data.order.subTotal |
+                            number:'2.2'}}</span>
+                        <span class="float-right m-auto ">Sub Total:</span>
+                    </span>
+                </div>
+                <div *ngIf="this.data.showCheckOutButton">
+                    <div>
+                        <span class="border ">
+                            <span class="float-right ml-2 ">
+                                GHC{{this.data.order.subTotal + this.data.order.deliveryCost |
+                                number:'2.2'}}</span>
+                            <span class="float-right m-auto ">Total:</span>
+                        </span>
+                    </div>
+                    <button class="float-right " (click)="goToCheckout()"> Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</section>

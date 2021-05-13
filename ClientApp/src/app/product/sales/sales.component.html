@@ -1,0 +1,54 @@
+<!-- Container for the image gallery -->
+<!-- Container for the image gallery 
+
+        
+                    <p>price {{price}} </p>
+                    <p>weight {{weightPerUnite}}</p>
+                    <p>{{productsName}}</p>
+                    <p>{{productUrls}}</p>
+                    <p>{{imageUrl1}}</p>
+                    <p>{{unit}}</p>
+                 
+            -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Your Item Add to the Basket</p>
+    <button class="btn btn-primary " (click)="continueShopping()">continue</button>
+    <button class="btn btn-primary" (click)="gotoBasket()">Go To Basket</button>
+  </div>
+  <div class="modal-footer">
+    <button #closeModal type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<section id="sales-section">
+<div id="ghacem-desc">
+  <p class="font-weight-bolder">{{productsName}}</p>
+  <p>
+    {{productDescription}}
+  </p>
+</div>
+<div id="inputsPanel">
+  <span class="mr-1">Quantity</span><span>
+    <input #inputQuantity type="number" min="0" max="200" name="sales-input" class="" id="inputQuantity"
+      (change)="quantityChange()" />
+  </span>
+  <span class="m-1">Price</span><span>GHC</span><span id="price">{{price}}</span>
+</div>
+<div id="totals-div" *ngIf="productQuantity > 0">
+  <span class="mr-1">Total</span><span>GHC</span><span>{{totalCost | number: '2.2'}}</span>
+</div>
+
+<div class="mt-1">
+  <span> <button id="chatbtn" type="button" class="btn btn-dark add-to-basket " (click)="addToChart(content)">ADD TO
+      CHART</button></span>
+
+</div>
+</section>

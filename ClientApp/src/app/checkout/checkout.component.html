@@ -1,0 +1,52 @@
+<section class="container">
+    <div class=" row" *ngIf="!this.isOrderSaved" >
+        <div class="col-md-12" >
+        <div class="card">
+            <div class="card-body">
+                <p>Your Order could not be saved</p>
+            </div>
+
+        </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="this.isOrderSaved" >
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <div>
+                            <span>Your order ID: {{this.order.customerID}}</span>
+                            <span></span>
+                        </div>
+                        <div>
+                            <span>Collection Date : {{this.order.collectionDate}}</span>
+                            <span></span>
+                        </div>
+                        <div *ngIf="!isDeliveryOrder" >
+                            <span class="mr-1">Price :{{this.order.subTotal  | number: '2.2'}} </span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div *ngIf="isDeliveryOrder">
+                        <div>
+                            <p>
+                                <span class="mr-1">Price :{{this.order.subTotal + this.delivery.deliveryCost | number: '2.2'}} </span>
+                            <span></span> 
+                            </p>
+                            
+
+                            <span class="mr-1">Delivery Address: </span><span>{{this.delivery.region}} , </span> <span>{{this.delivery.district}}</span>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>

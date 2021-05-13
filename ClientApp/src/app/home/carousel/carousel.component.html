@@ -1,0 +1,19 @@
+
+    <section class="row pl-1">
+        <div class="col-12 col-md-12  col-xl-12 col-lg-12 ">
+            <div class="sliders">
+                <ng-container *ngFor="let img of img; let i = index">
+                    <div class="slider" *ngIf="current == i" @fade>
+                        <img class="img" [src]="img">
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+
+    
+        
+    
+
+
+  

@@ -1,0 +1,50 @@
+ 
+ 
+  .card-columns .card {
+     height: 267px;
+     background-size: cover;
+    background-repeat: no-repeat;
+    background-color: steelblue;
+
+ }
+ .card-body{
+
+     height: 80px;
+     width: 250px;
+     margin-top: 5px;
+     margin-bottom: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+ .carousel-caption {
+     top: 50%;
+     bottom: 50%;
+ }
+
+ #cement{
+    background-image: url("/assets/img/product-category/cement.jpg");
+    
+}
+#building-aggregates{
+    background-image: url("/assets/img/product-category/sharp-sand.jpg");
+
+}
+#decorative-aggregates{
+    background-image: url("/assets/img/product-category/pebbles.jpg");
+
+
+}
+
+#limestone{
+    background-image: url("/assets/img/product-category/limestone.jpg");
+
+}
+#sandstone{
+    background-image: url("/assets/img/product-category/sandstone.jpg");
+}
+#chippings{
+    background-image: url("/assets/img/product-category/chippings.jpeg");
+
+}

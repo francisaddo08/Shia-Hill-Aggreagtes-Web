@@ -1,0 +1,15 @@
+#delivery-heading{
+    text-decoration: underline;
+}
+@media screen and (max-width: 600px) {
+    #delivery-desktop {
+      display: none;
+    }
+
+  }
+  @media screen and (min-width: 600px) {
+    #delivery-mobile {
+      display: none;
+    }
+    
+  }
